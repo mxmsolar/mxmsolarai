@@ -109,13 +109,43 @@ body {
   object-fit: cover;
 }
 
-.btn-download {
-  align-self: flex-start;
-  background: linear-gradient(135deg, #16a34a, #22c55e);
-  color: #f9fafb;
-  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.6);
-  text-decoration: none;
+/* Buttons – Basis */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.08s ease-out, box-shadow 0.08s ease-out,
+    background 0.12s ease-out;
+  white-space: nowrap;
 }
+
+.btn:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: none;
+}
+
+/* TikTok-Style Button */
+.btn-tiktok {
+  background: linear-gradient(120deg, #fe2c55, #25f4ee);
+  color: #05070a;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.6);
+}
+
+/* Primärer Button (Prompt abschicken) */
+.btn-primary {
+  margin-top: 12px;
+  background: linear-gradient(135deg, #1d4ed8, #7c3aed);
+  color: #f9fafb;
+  box-shadow: 0 6px 24px rgba(15, 23, 42, 0.85);
+}
+
 
 /* Utility */
 .hidden {
