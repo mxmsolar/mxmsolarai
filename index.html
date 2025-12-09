@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sci-Fi-Cyberpunk-Generator (SURAFLEX)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Verbinde deinen TikTok-Account, gib einen Prompt ein und lass SURAFLEX einen dystopischen Loop generieren." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <main class="container">
+    <div class="lang-switcher">
+      <select id="languageSelect">
+        <option value="de" selected>Deutsch</option>
+        <option value="en" >English</option>
+        <option value="pl" >Polski</option>
+      </select>
+    </div>
+
+    <header class="header">
+      <h1>Sci-Fi-Cyberpunk-Generator (SURAFLEX)</h1>
+      <p class="subtitle">Verbinde deinen TikTok-Account, gib einen Prompt ein und lass SURAFLEX einen dystopischen Loop generieren.</p>
+    </header>
+
+    <section id="login-section" class="card">
+      <h2>Login</h2>
+      <p class="hint">Melde dich mit TikTok an, um den Generator zu nutzen.</p>
+
+      <button id="tiktokLoginBtn" class="btn btn-tiktok">
+        Mit TikTok verbinden
+      </button>
+
+      <p class="small-note">
+        (Placeholder – TikTok OAuth integration coming soon.)
+      </p>
+    </section>
+
+    <section id="generator-section" class="card hidden">
+      <h2>Prompt</h2>
+      <textarea id="promptInput" class="textarea" placeholder="Beschreibe deine Szene – z. B. ‚Mädchen auf einem Pferd in einer Tech-Wüste…‘"></textarea>
+
+      <button id="sendPromptBtn" class="btn btn-primary">
+        Abschicken
+      </button>
+
+      <p id="status" class="status-text"></p>
+
+      <div id="previewWrapper" class="preview-wrapper hidden">
+        <p class="preview-label">Preview:</p>
+        <img id="imagePreview" class="image-preview" alt="image" />
+        <a id="downloadLink" class="btn btn-download" href="#" download>
+          Download
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

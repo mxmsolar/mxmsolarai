@@ -1,0 +1,123 @@
+/* Grundlayout */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #f7f7ff;
+}
+
+/* Hintergrundbild */
+body {
+  background: #05070a url("background.jpg") center center / cover no-repeat fixed;
+  position: relative;
+}
+
+/* Dunkler Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(0, 0, 0, 0.5), #020308);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* Container */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 48px auto;
+  padding: 0 16px 48px;
+}
+
+/* Language Switcher */
+.lang-switcher {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.lang-switcher select {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7f4;
+  font-size: 0.85rem;
+}
+
+/* Header */
+.header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.header h1 span {
+  font-size: 0.8em;
+  opacity: 0.85;
+}
+
+.subtitle {
+  margin: 0 0 24px;
+  max-width: 540px;
+  color: #d4d4e6;
+  font-size: 0.95rem;
+}
+
+/* Card */
+.card {
+  background: rgba(5, 8, 15, 0.9);
+  border-radius: 18px;
+  padding: 20px 18px 22px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  backdrop-filter: blur(16px);
+  margin-bottom: 16px;
+}
+
+/* Preview Elements */
+.preview-wrapper {
+  margin-top: 16px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(148, 163, 184, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.preview-label {
+  font-size: 0.85rem;
+  color: #cbd5f5;
+}
+
+.image-preview {
+  max-width: 100%;
+  max-height: 260px;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  object-fit: cover;
+}
+
+.btn-download {
+  align-self: flex-start;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  color: #f9fafb;
+  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.6);
+  text-decoration: none;
+}
+
+/* Utility */
+.hidden {
+  display: none;
+}
