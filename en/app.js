@@ -10,8 +10,18 @@ const imagePreview = document.getElementById("imagePreview");
 const downloadLink = document.getElementById("downloadLink");
 const languageSelect = document.getElementById("languageSelect");
 
+// Sprachwechsel
+languageSelect.addEventListener("change", (e) => {
+  const lang = e.target.value;
+  const BASE = "https://mxmsolar.github.io/mxmsolarai";
+
+  if (lang === "de") window.location.href = `${BASE}/`;
+  if (lang === "en") window.location.href = `${BASE}/en/`;
+  if (lang === "pl") window.location.href = `${BASE}/pl/`;
+});
+
 // TODO: Replace with your actual n8n webhook
-const N8N_WEBHOOK_URL = "https://DEIN-N8N-URL/webhook/suraflex";
+const N8N_WEBHOOK_URL = "https://n8n.srv1102290.hstgr.cloud/webhook/e438d543-c566-4dcf-971f-9744aa5746da";
 
 loginBtn.addEventListener("click", () => {
   loginSection.classList.add("hidden");
@@ -21,7 +31,7 @@ loginBtn.addEventListener("click", () => {
 sendPromptBtn.addEventListener("click", async () => {
   const prompt = promptInput.value.trim();
   if (!prompt) {
-    statusEl.textContent = "Bitte gib einen Prompt ein.";
+    statusEl.textContent = "Please type in the prompt for the picture you wish to create";
     return;
   }
 
@@ -29,7 +39,7 @@ sendPromptBtn.addEventListener("click", async () => {
   imagePreview.removeAttribute("src");
   downloadLink.href = "#";
 
-  statusEl.textContent = "Prompt wird an SURAFLEX gesendet…";
+  statusEl.textContent = "Prompt is sending to SURAFLEX…";
 
   try {
     const res = await fetch(N8N_WEBHOOK_URL, {
@@ -48,7 +58,7 @@ sendPromptBtn.addEventListener("click", async () => {
 
     statusEl.textContent =
       (data && (data.message || data.status)) ||
-      "Prompt empfangen. Dein Loop wird generiert.";
+      "Prompt received. Your loop is being generated.";
 
     if (data && data.imageUrl) {
       imagePreview.src = data.imageUrl;
@@ -58,12 +68,6 @@ sendPromptBtn.addEventListener("click", async () => {
   } catch (err) {
     console.error(err);
     statusEl.textContent =
-      "Fehler beim Senden des Prompts. Bitte später erneut versuchen.";
+      "Error sending prompt. Please try again later.";
   }
-});
-
-languageSelect.addEventListener("change", (e) => {
-  const lang = e.target.value;
-  if (lang === "en") window.location.href = "https://DEINE-EN-URL";
-  if (lang === "pl") window.location.href = "https://DEINE-PL-URL";
 });
