@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <title>Generator Sci-Fi Cyberpunk (SURAFLEX)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Połącz swoje konto TikTok, wpisz prompt i pozwól SURAFLEX stworzyć unikalny dystopijny obraz w stylu tech-art Mad Max." />
-  <link rel="stylesheet" href="../style.css" />
+  <meta name="description" content="Połącz konto TikTok, wpisz prompt i pozwól SURAFLEX stworzyć dystopijną scenę." />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="overlay"></div>
@@ -21,9 +21,7 @@
 
     <header class="header">
       <h1>Generator Sci-Fi Cyberpunk (SURAFLEX)</h1>
-      <p class="subtitle">
-        Połącz swoje konto TikTok, wpisz prompt i pozwól SURAFLEX wygenerować dystopijną pętlę.
-      </p>
+      <p class="subtitle">Połącz konto TikTok, wpisz prompt i pozwól SURAFLEX stworzyć dystopijną scenę.</p>
     </header>
 
     <section id="login-section" class="card">
@@ -35,17 +33,13 @@
       </button>
 
       <p class="small-note">
-        (Placeholder – integracja TikTok OAuth już wkrótce.)
+        (Placeholder — integracja TikTok OAuth już wkrótce.)
       </p>
     </section>
 
     <section id="generator-section" class="card hidden">
       <h2>Prompt</h2>
-      <textarea
-        id="promptInput"
-        class="textarea"
-        placeholder="Opisz scenę – np. „dziewczyna na koniu na pustyni”"
-      ></textarea>
+      <textarea id="promptInput" class="textarea" placeholder="Opisz scenę – np. 'Dziewczyna na koniu na pustyni technologicznej…'"></textarea>
 
       <button id="sendPromptBtn" class="btn btn-primary">
         Wyślij
@@ -54,25 +48,48 @@
       <p id="status" class="status-text"></p>
 
       <div id="previewWrapper" class="preview-wrapper hidden">
-        <p class="preview-label">Podgląd:</p>
-        <img
-          id="imagePreview"
-          class="image-preview"
-          src=""
-          alt="Wygenerowany obraz"
-        />
-        <a
-          id="downloadLink"
-          class="btn btn-download"
-          href="#"
-          download="suraflex-image.png"
-        >
-          Pobierz
+        <p class="preview-label">Preview:</p>
+        <img id="imagePreview" class="image-preview" alt="image" />
+        <a id="downloadLink" class="btn btn-download" href="#" download>
+          Download
         </a>
       </div>
     </section>
   </main>
 
-  <script src="../app.js"></script>
+  <script src="app.js"></script>
+
+  <!-- TikTok OAuth Logic -->
+  <script>
+    (function () {
+      const TIKTOK_CLIENT_KEY = "awod6j3bufc2en4c";
+      const TIKTOK_REDIRECT_URI = "https://n8n.srv1102290.hstgr.cloud/webhook/tiktok-login-callback";
+      const TIKTOK_SCOPE = "user.info.basic,video.publish";
+
+      const loginSection = document.getElementById("login-section");
+      const generatorSection = document.getElementById("generator-section");
+      const loginBtn = document.getElementById("tiktokLoginBtn");
+
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("logged_in") === "1") {
+        loginSection.classList.add("hidden");
+        generatorSection.classList.remove("hidden");
+      }
+
+      if (loginBtn) {
+        loginBtn.addEventListener("click", () => {
+          const authUrl =
+            "https://www.tiktok.com/v2/auth/authorize/" +
+            "?client_key=" + encodeURIComponent(TIKTOK_CLIENT_KEY) +
+            "&response_type=code" +
+            "&scope=" + encodeURIComponent(TIKTOK_SCOPE) +
+            "&redirect_uri=" + encodeURIComponent(TIKTOK_REDIRECT_URI) +
+            "&state=suraflex";
+
+          window.location.href = authUrl;
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
