@@ -73,6 +73,46 @@
     </section>
   </main>
 
+  <!-- bestehende Logik für Prompt/Webhook -->
   <script src="app.js"></script>
+
+  <!-- neue, minimale TikTok-OAuth-Logik -->
+  <script>
+    (function () {
+      // TODO: durch deine echten Sandbox-Daten ersetzen
+      const TIKTOK_CLIENT_KEY = "DEIN_TIKTOK_CLIENT_KEY";
+      const TIKTOK_REDIRECT_URI = "https://n8n.srv1102290.hstgr.cloud/webhook/tiktok-login-callback";
+      const TIKTOK_SCOPE = "user.info.basic,video.publish";
+
+      const loginSection = document.getElementById("login-section");
+      const generatorSection = document.getElementById("generator-section");
+      const loginBtn = document.getElementById("tiktokLoginBtn");
+
+      // Wenn n8n nach erfolgreichem Login mit ?logged_in=1 zurückleitet:
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("logged_in") === "1") {
+        if (loginSection && generatorSection) {
+          loginSection.classList.add("hidden");
+          generatorSection.classList.remove("hidden");
+        }
+      }
+
+      // Klick auf „Mit TikTok verbinden“ → OAuth-Redirect
+      if (loginBtn) {
+        loginBtn.addEventListener("click", () => {
+          const authUrl =
+            "https://www.tiktok.com/v2/auth/authorize/" +
+            "?client_key=" + encodeURIComponent(TIKTOK_CLIENT_KEY) +
+            "&response_type=code" +
+            "&scope=" + encodeURIComponent(TIKTOK_SCOPE) +
+            "&redirect_uri=" + encodeURIComponent(TIKTOK_REDIRECT_URI) +
+            "&state=suraflex";
+
+          window.location.href = authUrl;
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
+
