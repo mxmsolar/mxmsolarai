@@ -10,7 +10,7 @@ const imagePreview = document.getElementById("imagePreview");
 const downloadLink = document.getElementById("downloadLink");
 const languageSelect = document.getElementById("languageSelect");
 
-// Language switcher
+// Language switch
 languageSelect.addEventListener("change", (e) => {
   const lang = e.target.value;
   const BASE = "https://mxmsolar.github.io/mxmsolarai";
@@ -21,9 +21,10 @@ languageSelect.addEventListener("change", (e) => {
 });
 
 // n8n Webhook PRODUCTION
-const N8N_WEBHOOK_URL = "https://n8n.srv1102290.hstgr.cloud/webhook/28568d52-8010-42c8-bfba-1c27145f158e";
+const N8N_WEBHOOK_URL =
+  "https://n8n.srv1102290.hstgr.cloud/webhook/28568d52-8010-42c8-bfba-1c27145f158e";
 
-// Login
+// Login → open generator
 loginBtn.addEventListener("click", () => {
   loginSection.classList.add("hidden");
   generatorSection.classList.remove("hidden");
@@ -32,13 +33,15 @@ loginBtn.addEventListener("click", () => {
 // Send prompt
 sendPromptBtn.addEventListener("click", async () => {
   const prompt = promptInput.value.trim();
+
   if (!prompt) {
     statusEl.textContent = "Please enter a prompt.";
     return;
   }
 
+  // Reset preview
   previewWrapper.classList.add("hidden");
-  imagePreview.removeAttribute("src");
+  imagePreview.src = "";
   downloadLink.href = "#";
 
   statusEl.textContent = "Sending prompt to SURAFLEX…";
@@ -51,11 +54,15 @@ sendPromptBtn.addEventListener("click", async () => {
     });
 
     let data = null;
-    try { data = await res.json(); } catch (e) {}
+    try {
+      data = await res.json();
+    } catch (e) {
+      console.warn("No JSON response received.");
+    }
 
     statusEl.textContent =
       (data && (data.message || data.status)) ||
-      "Prompt received. Your image is being generated.";
+      "Prompt received. Your image is being generated…";
 
     if (data && data.imageUrl) {
       imagePreview.src = data.imageUrl;
@@ -63,10 +70,8 @@ sendPromptBtn.addEventListener("click", async () => {
       previewWrapper.classList.remove("hidden");
     }
   } catch (err) {
-    console.error(err);
-    statusEl.textContent = "Error sending prompt. Please try again later.";
+    console.error("Fetch error:", err);
+    statusEl.textContent =
+      "Error sending prompt. Please try again later.";
   }
 });
-
-
-
