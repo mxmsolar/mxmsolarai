@@ -64,11 +64,13 @@ sendPromptBtn.addEventListener("click", async () => {
       (data && (data.message || data.status)) ||
       "Prompt received. Your image is being generated…";
 
-    if (data && data.imageUrl) {
-      imagePreview.src = data.imageUrl;
-      downloadLink.href = data.imageUrl;
-      previewWrapper.classList.remove("hidden");
-    }
+if (data && data.imageUrl) {
+  imagePreview.src = data.imageUrl;
+  downloadLink.href = data.imageUrl;
+  downloadLink.download = data.fileName || "suraflex-image.png";
+  previewWrapper.classList.remove("hidden");
+}
+
   } catch (err) {
     console.error("Fetch error:", err);
     statusEl.textContent =
