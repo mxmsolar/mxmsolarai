@@ -64,17 +64,20 @@ sendPromptBtn.addEventListener("click", async () => {
       (data && (data.message || data.status)) ||
       "Prompt został odebrany. Obraz jest generowany…";
 
-    if (data && data.imageUrl) {
-      imagePreview.src = data.imageUrl;
-      downloadLink.href = data.imageUrl;
-      previewWrapper.classList.remove("hidden");
-    }
+if (data && data.imageUrl) {
+  imagePreview.src = data.imageUrl;
+  downloadLink.href = data.imageUrl;
+  downloadLink.download = data.fileName || "suraflex-image.png";
+  previewWrapper.classList.remove("hidden");
+}
+
   } catch (err) {
     console.error("Fetch error:", err);
     statusEl.textContent =
       "Błąd podczas wysyłania promptu. Spróbuj ponownie później.";
   }
 });
+
 
 
 
