@@ -78,6 +78,9 @@
 
       if (loginBtn) {
         loginBtn.addEventListener("click", () => {
+
+          console.log("TikTok CLIENT KEY in page:", TIKTOK_CLIENT_KEY);
+          
           const authUrl =
             "https://www.tiktok.com/v2/auth/authorize/" +
             "?client_key=" + encodeURIComponent(TIKTOK_CLIENT_KEY) +
