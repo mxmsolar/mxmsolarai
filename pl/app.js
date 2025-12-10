@@ -10,7 +10,7 @@ const imagePreview = document.getElementById("imagePreview");
 const downloadLink = document.getElementById("downloadLink");
 const languageSelect = document.getElementById("languageSelect");
 
-// Przełączanie języka
+// Zmiana języka
 languageSelect.addEventListener("change", (e) => {
   const lang = e.target.value;
   const BASE = "https://mxmsolar.github.io/mxmsolarai";
@@ -20,9 +20,11 @@ languageSelect.addEventListener("change", (e) => {
   if (lang === "pl") window.location.href = `${BASE}/pl/`;
 });
 
-// n8n Webhook PRODUKCJA
-const N8N_WEBHOOK_URL = "https://n8n.srv1102290.hstgr.cloud/webhook/28568d52-8010-42c8-bfba-1c27145f158e";
-// Login
+// n8n Webhook PRODUCTION
+const N8N_WEBHOOK_URL =
+  "https://n8n.srv1102290.hstgr.cloud/webhook/28568d52-8010-42c8-bfba-1c27145f158e";
+
+// Login → otwiera generator
 loginBtn.addEventListener("click", () => {
   loginSection.classList.add("hidden");
   generatorSection.classList.remove("hidden");
@@ -31,16 +33,18 @@ loginBtn.addEventListener("click", () => {
 // Wysyłanie promptu
 sendPromptBtn.addEventListener("click", async () => {
   const prompt = promptInput.value.trim();
+
   if (!prompt) {
     statusEl.textContent = "Proszę wpisać prompt.";
     return;
   }
 
+  // Reset podglądu
   previewWrapper.classList.add("hidden");
-  imagePreview.removeAttribute("src");
+  imagePreview.src = "";
   downloadLink.href = "#";
 
-  statusEl.textContent = "Prompt wysyłany do SURAFLEX…";
+  statusEl.textContent = "Prompt jest wysyłany do SURAFLEX…";
 
   try {
     const res = await fetch(N8N_WEBHOOK_URL, {
@@ -50,11 +54,15 @@ sendPromptBtn.addEventListener("click", async () => {
     });
 
     let data = null;
-    try { data = await res.json(); } catch (e) {}
+    try {
+      data = await res.json();
+    } catch (e) {
+      console.warn("Brak odpowiedzi w formacie JSON.");
+    }
 
     statusEl.textContent =
       (data && (data.message || data.status)) ||
-      "Prompt odebrany. Twój obraz jest generowany.";
+      "Prompt został odebrany. Obraz jest generowany…";
 
     if (data && data.imageUrl) {
       imagePreview.src = data.imageUrl;
@@ -62,10 +70,12 @@ sendPromptBtn.addEventListener("click", async () => {
       previewWrapper.classList.remove("hidden");
     }
   } catch (err) {
-    console.error(err);
-    statusEl.textContent = "Błąd wysyłania. Spróbuj ponownie później.";
+    console.error("Fetch error:", err);
+    statusEl.textContent =
+      "Błąd podczas wysyłania promptu. Spróbuj ponownie później.";
   }
 });
+
 
 
 
