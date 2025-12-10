@@ -99,6 +99,9 @@
 
       // Klick auf „Mit TikTok verbinden“ → OAuth-Redirect
       if (loginBtn) {
+
+        console.log("TikTok CLIENT KEY in page:", TIKTOK_CLIENT_KEY);
+        
         loginBtn.addEventListener("click", () => {
           const authUrl =
             "https://www.tiktok.com/v2/auth/authorize/" +
