@@ -3,8 +3,8 @@
 (function () {
   // ==== CONFIG ====
   const TIKTOK_CLIENT_KEY = "sbawvglf7emvtteyef";
-  const TIKTOK_REDIRECT_URI =
-    "https://n8n.srv1102290.hstgr.cloud/webhook/tiktok-login-callback";
+const TIKTOK_REDIRECT_URI =
+  "https://auth.mxmsolar.online/webhook/tiktok-login-callback";
   const TIKTOK_SCOPE = "user.info.basic,video.publish";
 
   const N8N_WEBHOOK_GENERATE =
