@@ -28,14 +28,9 @@ body {
     Roboto, sans-serif;
   color: var(--text-main);
 
-  /* Background image (root) + fallback gradient */
-  background:
-    radial-gradient(circle at top, #0c1020 0, #02030a 60%, #000 100%),
-    url("./background.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  /* ✅ Background image in repo root */
+  background: url("./background.jpg") center / cover no-repeat fixed;
+  background-color: #02030a; /* fallback if image fails */
 
   overflow-x: hidden;
 }
@@ -52,7 +47,7 @@ body {
   background:
     radial-gradient(circle at 10% 0%, rgba(255, 75, 155, 0.16), transparent 55%),
     radial-gradient(circle at 80% 80%, rgba(53, 211, 255, 0.18), transparent 55%),
-    linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.78));
+    linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.55));
   opacity: 1;
   z-index: 0;
 }
