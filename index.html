@@ -1,221 +1,102 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Suraflex Generator – AI-powered cyberpunk image generation and direct TikTok posting via OAuth." />
-  <title>Suraflex Generator</title>
-
-  <link rel="stylesheet" href="./style.css" />
+  <meta charset="UTF-8" />
+  <title>Sci-Fi-Cyberpunk-Generator (SURAFLEX)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Verbinde deinen TikTok-Account, gib einen Prompt ein und lass SURAFLEX einen dystopischen Cyberpunk-Loop generieren."
+  />
+  <link rel="stylesheet" href="style.css" />
 </head>
+<body>
+  <div class="overlay"></div>
 
-<body data-theme="dark">
-  <div class="bg" aria-hidden="true"></div>
-  <div class="grid" aria-hidden="true"></div>
+  <main class="container">
+    <div class="lang-switcher">
+      <select id="languageSelect">
+        <option value="de" selected>Deutsch</option>
+        <option value="en">English</option>
+        <option value="pl">Polski</option>
+      </select>
+    </div>
 
-  <div class="container">
     <header class="header">
-      <a class="brand" href="./" aria-label="Suraflex Generator home">
-        <div class="logo" aria-hidden="true"></div>
-        <div class="brandText">
-          <h1>Suraflex Generator</h1>
-          <p>AI cyberpunk images • TikTok OAuth • Direct posting</p>
-        </div>
-      </a>
-
-      <div class="topActions">
-        <button class="btn" id="themeBtn" title="Toggle theme">
-          Theme <span class="pill" id="themeLabel">Dark</span>
-        </button>
-        <a class="btn" href="./terms.html">Terms</a>
-        <a class="btn" href="./privacy.html">Privacy</a>
-        <button class="btn primary" id="contactBtn">Contact</button>
-      </div>
+      <h1>Sci-Fi-Cyberpunk-Generator (SURAFLEX)</h1>
+      <p class="subtitle">
+        Verbinde deinen TikTok-Account, gib einen Prompt ein und lass SURAFLEX
+        einen dystopischen Cyberpunk-Loop generieren.
+      </p>
     </header>
 
-    <main class="hero">
-      <section class="card">
-        <div class="kicker">
-          <span class="dot"></span>
-          <span class="pill">Official website</span>
-          <span class="pill">Web app</span>
-        </div>
+    <section id="login-section" class="card">
+      <h2>Login</h2>
+      <p class="hint">
+        Melde dich mit TikTok an, um den Generator zu nutzen.
+      </p>
 
-        <h2 class="title">Generate. Preview. Post to TikTok.</h2>
-        <p class="subtitle">
-          Suraflex Generator is a web app that turns a text prompt into a dystopian/cyberpunk image.
-          After connecting your TikTok account via OAuth, you can upload generated content to your TikTok profile
-          (draft or direct post, depending on configuration).
-        </p>
+      <button id="tiktokLoginBtn" class="btn btn-tiktok">
+        Mit TikTok verbinden
+      </button>
 
-        <div class="ctaRow">
-          <!-- Replace with your real web app URL -->
-          <a class="btn primary link" id="openAppBtn" href="https://YOUR-WEB-APP-URL.example" target="_blank" rel="noopener">
-            Open Web App <span class="pill">new tab</span>
-          </a>
+      <p class="small-note">
+        (Sandbox-Version – TikTok-OAuth ist aktiv, aber nur für Testnutzer.)
+      </p>
+    </section>
 
-          <button class="btn" id="copyUrlsBtn" title="Copy the official URLs for TikTok review">
-            Copy URLs for TikTok Review
-          </button>
-        </div>
-
-        <p class="mini">
-          Keep all TikTok app fields on the same domain:
-          <span class="kbd" id="baseUrlLabel"></span>
-        </p>
-
-        <div class="divider"></div>
-
-        <div class="section">
-          <div class="tile">
-            <h3>Login Kit (OAuth)</h3>
-            <p>Users connect their TikTok account and grant permissions required for posting.</p>
-          </div>
-          <div class="tile">
-            <h3>Content Posting API</h3>
-            <p>Generated media can be uploaded to TikTok (draft or direct posting if enabled).</p>
-          </div>
-          <div class="tile">
-            <h3>Privacy by design</h3>
-            <p>We minimize data, store tokens securely, and provide transparency in the Privacy Policy.</p>
-          </div>
-        </div>
-      </section>
-
-      <aside class="card demo">
-        <h3 class="h3">Interactive preview</h3>
-        <p class="muted">
-          This is only a reviewer preview. It illustrates what the user does in the web app.
-        </p>
-
-        <input class="input" id="promptInput" placeholder="Type a prompt… e.g. Neon street market, rain, chrome umbrellas, cinematic lighting" />
-
-        <div class="preview" aria-live="polite">
-          <strong>What will happen:</strong>
-          <p id="previewText">
-            1) Enter a prompt → 2) Image is generated → 3) Connect TikTok → 4) Upload / Post
-          </p>
-
-          <div class="row">
-            <button class="btn" id="simulateBtn">Simulate Generation</button>
-            <span class="pill" id="statusPill">Idle</span>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <h3 class="h3">FAQ</h3>
-        <div class="faq">
-          <details>
-            <summary>
-              What data do you collect?
-              <span class="pill">privacy</span>
-            </summary>
-            <p>
-              We may process TikTok OAuth tokens (to post content), usage logs for reliability, and the content the user uploads.
-              See the <a href="./privacy.html">Privacy Policy</a> for details.
-            </p>
-          </details>
-
-          <details>
-            <summary>
-              Does it post automatically?
-              <span class="pill">posting</span>
-            </summary>
-            <p>
-              Posting requires user authorization via TikTok OAuth. Depending on your configuration,
-              uploads can be saved as drafts or posted directly.
-            </p>
-          </details>
-
-          <details>
-            <summary>
-              Where are Terms and Privacy hosted?
-              <span class="pill">compliance</span>
-            </summary>
-            <p>
-              This site, Terms, and Privacy are hosted together on the same official domain (GitHub Pages),
-              as recommended for platform review.
-            </p>
-          </details>
-        </div>
-      </aside>
-    </main>
-
-    <footer class="footer">
-      <div>
-        © <span id="year"></span> Suraflex Generator •
-        <a href="./terms.html">Terms</a> •
-        <a href="./privacy.html">Privacy</a>
+    <section id="generator-section" class="card hidden">
+      <div id="loginStatus" class="login-status hidden">
+        ● Verbunden mit TikTok (Sandbox)
       </div>
-      <div>
-        Contact: <a href="#" id="footerContact">Open contact</a>
+
+      <h2>Prompt</h2>
+      <textarea
+        id="promptInput"
+        class="textarea"
+        placeholder="Beschreibe deine Szene – z. B. „Mädchen auf einem Pferd in einer Neon-Wüste…“"
+      ></textarea>
+
+      <button id="sendPromptBtn" class="btn btn-primary">
+        Abschicken
+      </button>
+
+      <div id="progressWrapper" class="progress-wrapper hidden">
+        <p id="progressLabel" class="progress-label">Wird generiert…</p>
+        <div class="progress-bar">
+          <div id="progressBarFill" class="progress-bar-fill"></div>
+        </div>
       </div>
-    </footer>
-  </div>
 
-  <div class="toast" id="toast" role="status" aria-live="polite">
-    <span class="ok" aria-hidden="true"></span>
-    <span id="toastText">Copied.</span>
-  </div>
+      <p id="status" class="status-text"></p>
 
-  <script>
-    const $ = (id) => document.getElementById(id);
+      <div id="previewWrapper" class="preview-wrapper hidden">
+        <p class="preview-label">Preview:</p>
+        <img
+          id="imagePreview"
+          class="image-preview"
+          src=""
+          alt="Generiertes Bild"
+        />
 
-    function toast(msg){
-      const t = $("toast");
-      $("toastText").textContent = msg;
-      t.classList.add("show");
-      setTimeout(()=>t.classList.remove("show"), 2200);
-    }
+        <a
+          id="downloadLink"
+          class="btn btn-download"
+          href="#"
+          download="suraflex-image.png"
+        >
+          Download
+        </a>
 
-    // base url label
-    const base = location.origin + location.pathname.replace(/\/[^\/]*$/, "/");
-    $("baseUrlLabel").textContent = base;
+        <button id="postToTikTokBtn" class="btn btn-secondary hidden">
+          Direkt auf TikTok posten
+        </button>
 
-    // year
-    $("year").textContent = new Date().getFullYear();
+        <p id="tiktokStatus" class="status-text status-text--secondary"></p>
+      </div>
+    </section>
+  </main>
 
-    // theme toggle
-    const themeLabel = $("themeLabel");
-    function setTheme(mode){
-      document.body.setAttribute("data-theme", mode);
-      themeLabel.textContent = mode[0].toUpperCase() + mode.slice(1);
-      localStorage.setItem("theme", mode);
-    }
-    setTheme(localStorage.getItem("theme") || "dark");
-    $("themeBtn").addEventListener("click", ()=>{
-      const cur = document.body.getAttribute("data-theme");
-      setTheme(cur === "dark" ? "light" : "dark");
-    });
-
-    // interactive preview
-    const promptInput = $("promptInput");
-    const previewText = $("previewText");
-    const statusPill = $("statusPill");
-
-    function updatePreview(){
-      const v = promptInput.value.trim();
-      previewText.textContent = v
-        ? `Prompt: “${v}” → Image is generated → TikTok OAuth → Upload/Post`
-        : "1) Enter a prompt → 2) Image is generated → 3) Connect TikTok → 4) Upload / Post";
-    }
-    promptInput.addEventListener("input", updatePreview);
-    updatePreview();
-
-    $("simulateBtn").addEventListener("click", async ()=>{
-      statusPill.textContent = "Generating…";
-      await new Promise(r => setTimeout(r, 650));
-      statusPill.textContent = "Ready to upload";
-      toast("Preview simulated (demo).");
-    });
-
-    // contact
-    function openContact(){
-      const email = "YOUR-CONTACT-EMAIL@example.com";
-      const subject = encodeURIComponent("Suraflex Generator – Inquiry");
-      const body = encodeURIComponent("Hi,\n\nI have a question about Suraflex Generator.\n\nThanks!");
-      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
-    }
-    $("contactBtn").addEventListener("click", openContact);
-
+  <script src="app.js"></script>
+</body>
+</html>
