@@ -312,3 +312,63 @@ body {
     font-size: 1.5rem;
   }
 }
+/* COPY & PASTE: add this to the END of your existing style.css (no other changes) */
+
+/* Top right actions: Terms / Privacy + language */
+.top-actions{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+  flex-wrap:wrap;
+}
+
+.pill-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:0.85rem;
+  font-weight:600;
+  letter-spacing:.01em;
+  color: var(--text-main);
+  text-decoration:none;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(10, 12, 20, 0.55);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.35);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+  backdrop-filter: blur(14px);
+}
+
+.pill-link:hover{
+  transform: translateY(-1px);
+  background: rgba(10, 12, 20, 0.72);
+  border-color: rgba(255,255,255,0.22);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.45);
+  text-decoration:none;
+}
+
+.pill-link:focus{
+  outline:none;
+  box-shadow: 0 0 0 3px rgba(53,211,255,0.22), 0 14px 34px rgba(0,0,0,0.45);
+}
+
+.pill-link--alt{
+  border-color: rgba(53, 211, 255, 0.35);
+  color: var(--accent-secondary);
+}
+
+.pill-link--alt:hover{
+  border-color: rgba(53, 211, 255, 0.55);
+  background: rgba(53, 211, 255, 0.10);
+}
+
+/* Mobile */
+@media (max-width: 640px){
+  .top-actions{
+    justify-content:center;
+    gap:8px;
+  }
+}
