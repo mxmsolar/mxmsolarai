@@ -338,3 +338,22 @@
     });
   }
 })();
+
+(() => {
+  const select = document.getElementById("languageSelect");
+  if (!select) return;
+
+  const base = "/mxmsolarai/"; // GitHub Pages project base
+
+  select.addEventListener("change", (e) => {
+    const v = e.target.value;
+
+    if (v === "de") {
+      window.location.href = base;          // ✅ root
+    } else if (v === "en") {
+      window.location.href = base + "en/";  // ✅ /en/
+    } else if (v === "pl") {
+      window.location.href = base + "pl/";  // ✅ /pl/
+    }
+  });
+})();
